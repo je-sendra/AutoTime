@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using VewTech.AutoTime.Library;
+using VewTech.AutoTime.Library.Models;
 using VewTech.AutoTime.Library.Models.Intratime;
 
 namespace VewTech.AutoTime.Middleware.Controllers;
@@ -27,18 +28,42 @@ public class UserController : Controller
 
     // Post a clocking using the user token
     [HttpPost("clocking")]
-    public void PostClocking(string userAction, string timestamp, string coordinates, string token)
+    public void PostClocking(int userAction, DateTime timestamp, string coordinates, string token)
     {
         var httpRequest = new HttpRequestMessage(HttpMethod.Post, "user/clocking");
         var a = userAction.ToString();
         var content = new FormUrlEncodedContent(new[]
         {
-            new KeyValuePair<string, string>("user_action", userAction),
-            new KeyValuePair<string, string>("user_timestamp", timestamp),
+            new KeyValuePair<string, string>("user_action", userAction.ToString()),
+            new KeyValuePair<string, string>("user_timestamp", timestamp.ToString()),
         });
         httpRequest.Headers.Add("token", token);
         httpRequest.Content = content;
         var response = Clients.IntratimeClient.SendAsync(httpRequest).Result;
-        if (!response.IsSuccessStatusCode) throw new HttpRequestException(response.Content.ReadAsStringAsync().Result);
+        if (!response.IsSuccessStatusCode) 
+        throw new HttpRequestException(response.Content.ReadAsStringAsync().Result);
+    }
+
+    // Post a whole Schedule object
+    [HttpPost("schedule")]
+    public void PostSchedule(Schedule schedule, DateOnly date, string token)
+    {
+        var random = new Random();
+        foreach (var currentClocking in schedule.Clockings)
+        {
+            var variationSeconds = random.Next(schedule.MinutesVariation * 60);
+            
+            var datetime = ( // The datetime the clocking will be performed at
+                date.ToDateTime(TimeOnly.MinValue) +  // Convert the parameter DateOnly to DateTime
+                currentClocking.ScheduledTime.ToTimeSpan()) // Add the ScheduleTime
+                .AddSeconds(variationSeconds); // Add the variation
+            
+            PostClocking(
+                (int) currentClocking.Action,
+                datetime,
+                "39.35564548706826, -0.4456134227862798",
+                token
+            );
+        }
     }
 }
