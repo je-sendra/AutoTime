@@ -3,6 +3,8 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 import RepoButton from '../components/RepoButton'
 
 export default function MainLayout() {
+
+
     return (
         <>
             <nav
@@ -16,18 +18,29 @@ export default function MainLayout() {
                     ps-3
                     pe-3"
             >
+
                 <ul className="navbar-nav">
-                    <li className="nav-item">
-                        <Link className="nav-link text-white" to="/">INICIO</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link className="nav-link text-white" to="/schedules">HORARIOS</Link>
-                    </li>
+                    {
+                        "userToken" !== undefined ?
+                            <>
+                                <li className="nav-item">
+                                    <Link className="nav-link text-white" to="/">INICIO</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link text-white" to="/schedules">HORARIOS</Link>
+                                </li>
+                            </>
+                            :
+                            <li className='nav-item'>
+                                <Link className='nav-link text-white' to="https://intratime.es">Intratime</Link>
+                            </li>
+                    }
                 </ul>
+
 
                 <RepoButton />
             </nav>
-            <div style={{paddingTop: 56}}></div>
+            <div style={{ paddingTop: 56 }}></div>
             <Outlet />
         </>
     )

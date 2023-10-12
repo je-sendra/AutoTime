@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PageHeader from "../components/PageHeader";
 import ScheduleCard from "../components/ScheduleCard";
-import { Schedule } from "../types/Schedule";
+import { Schedule } from "../models/Schedule";
 
 export default function MySchedulesPage() {
 
@@ -9,12 +9,25 @@ export default function MySchedulesPage() {
     const [newScheduleName, setNewScheduleName] = useState<string>("")
 
     function addSchedule(name: string) {
-        if(name === "") return
+        if (name === "") return
         let newSchedule = new Schedule(name);
-        console.log(JSON.stringify(newSchedule))
         newSchedule.pushToLocalStorage();
         setSchedules([...schedules, newSchedule])
     }
+
+    useEffect(() => {
+        const onStorage = () => {
+            setSchedules(Schedule.getAll())
+        };
+    
+        window.addEventListener('storage', onStorage);
+    
+        
+
+        return () => {
+            window.removeEventListener('storage', onStorage);
+        };
+    })
 
     return (
         <>
@@ -31,7 +44,7 @@ export default function MySchedulesPage() {
                             className="form-control"
                             placeholder="Nuevo horario"
                             value={newScheduleName}
-                            onChange={evt => {setNewScheduleName(evt.target.value)}}
+                            onChange={evt => { setNewScheduleName(evt.target.value) }}
                         />
                         <label htmlFor="newScheduleNameInput">Nuevo horario</label>
                     </div>
@@ -53,7 +66,7 @@ export default function MySchedulesPage() {
                     <div className="row row-gap-3">
                         {schedules.map((currentSchedule) =>
                             <div className="col" key={currentSchedule.idSchedule}>
-                                <ScheduleCard schedule={currentSchedule}/>
+                                <ScheduleCard schedule={currentSchedule} />
                             </div>
                         )}
                     </div>
