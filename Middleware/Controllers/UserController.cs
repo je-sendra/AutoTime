@@ -28,14 +28,14 @@ public class UserController : Controller
 
     // Post a clocking using the user token
     [HttpPost("clocking")]
-    public void PostClocking(int userAction, DateTime timestamp, string coordinates, string token)
+    public void PostClocking(int userAction, DateTime timestamp, string token)
     {
         var httpRequest = new HttpRequestMessage(HttpMethod.Post, "user/clocking");
         var a = userAction.ToString();
         var content = new FormUrlEncodedContent(new[]
         {
             new KeyValuePair<string, string>("user_action", userAction.ToString()),
-            new KeyValuePair<string, string>("user_timestamp", timestamp.ToString()),
+            new KeyValuePair<string, string>("user_timestamp", timestamp.ToString("yyyy'-'MM'-'dd HH':'mm':'ss")),
         });
         httpRequest.Headers.Add("token", token);
         httpRequest.Content = content;
@@ -46,7 +46,7 @@ public class UserController : Controller
 
     // Post a whole Schedule object
     [HttpPost("schedule")]
-    public void PostSchedule(Schedule schedule, DateOnly date, string token)
+    public void PostSchedule([FromBody] Schedule schedule, DateOnly date, string token)
     {
         var random = new Random();
         foreach (var currentClocking in schedule.Clockings)
@@ -61,7 +61,6 @@ public class UserController : Controller
             PostClocking(
                 (int) currentClocking.Action,
                 datetime,
-                "39.35564548706826, -0.4456134227862798",
                 token
             );
         }

@@ -12,6 +12,7 @@ export default function MainLayout() {
                     navbar-dark
                     bg-primary
                     justify-content-between
+                    fixed-top
                     ps-3
                     pe-3"
             >
@@ -24,24 +25,9 @@ export default function MainLayout() {
                     </li>
                 </ul>
 
-                <div className='btn-group'>
-                    <button
-                        className='btn btn-dark dropdown-toggle'
-                        data-bs-toggle='dropdown'
-                    >
-                        <i
-                            className='bi bi-github pad2y'
-                            style={{
-                                color: 'white',
-                                paddingRight: '10px'
-                            }}
-                        />
-                        REPOSITORIO
-                    </button>
-
-                    <RepoButton />
-                </div>
+                <RepoButton />
             </nav>
+            <div style={{paddingTop: 56}}></div>
             <Outlet />
         </>
     )

@@ -8,15 +8,24 @@ namespace VewTech.AutoTime.Library.Models;
 public class Schedule
 {
     /// <summary>
-    /// The default constructor for a Schedule.
+    /// The name will be "default".
+    /// <para>The IdSchedule property will be a
+    /// randomly generated Guid.</para>
+    /// </summary>
+    public Schedule()
+    {
+        IdSchedule = Guid.NewGuid();
+        Name = "default";
+    }
+
+    /// <summary>
     /// <para>The IdSchedule property will be a
     /// randomly generated Guid.</para>
     /// </summary>
     /// <param name="name">The name to be assigned
     /// to the new Schedule.</param>
-    public Schedule(string name)
+    public Schedule(string name) : this()
     {
-        IdSchedule = Guid.NewGuid();
         Name = name;
     }
 
