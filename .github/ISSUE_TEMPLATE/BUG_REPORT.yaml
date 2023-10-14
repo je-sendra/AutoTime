@@ -1,0 +1,54 @@
+name: Informe de Bug
+description: Notifica un bug en la aplicación
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ¡Gracias por tomarte el tiempo de rellenar este formulario!
+  - type: input
+    id: contact
+    attributes:
+      label: Detalles de contacto (opcional)
+      description: ¿Cómo podemos ponernos en contacto contigo si necesitamos más información?
+      placeholder: ej. email@ejemplo.com
+    validations:
+      required: false
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: ¿Qué ha pasado?
+      description: Explica el problema con detalle
+      placeholder: ¡Dinos lo que ves!
+      value: "¡Ha ocurrido un problema!"
+    validations:
+      required: true
+  - type: dropdown
+    id: version
+    attributes:
+      label: Version
+      description: ¿Qué versión de nuestro software estás utilizando?
+      options:
+        - 1.0.0
+    validations:
+      required: true
+  - type: dropdown
+    id: browsers
+    attributes:
+      label: ¿En qué navegadores sucede este error?
+      multiple: true
+      options:
+        - Firefox
+        - Chrome
+        - Safari
+        - Microsoft Edge
+        - Opera
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs relevantes
+      description: Por favor introduce cualquier log que pueda ser relevante para resolver el problema.
+      render: Shell

@@ -1,0 +1,39 @@
+name: Solicitud de Funcionalidad
+description: Proporciona una sugerencia para una nueva funcionalidad
+title: "[Enhancement]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ¡Gracias por tomarte el tiempo de rellenar este formulario!
+  - type: input
+    id: contact
+    attributes:
+      label: Detalles de contacto (opcional)
+      description: ¿Cómo podemos ponernos en contacto contigo si necesitamos más información?
+      placeholder: ej. email@ejemplo.com
+    validations:
+      required: false
+  - type: input
+    id: summary
+    attributes:
+      label: Resumen
+      description: "Proporciona un resumen conciso de la funcionalidad sugerida."
+      placeholder: "Ejemplo: Añadir un botón para..."
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Descripción detallada
+      description: "Describe en detalle la funcionalidad que te gustaría ver implementada."
+    validations:
+      required: true
+  - type: textarea
+    id: technical
+    attributes:
+      label: Descripción técnica (opcional)
+      description: "Describe cómo funciona, a nivel técnico, dicha funcionalidad."
+    validations:
+      required: false
