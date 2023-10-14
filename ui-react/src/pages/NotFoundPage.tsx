@@ -1,7 +1,5 @@
-export default function NotFoundPage() {
-    return (
-        <>
-        NOT FOUND
-        </>
+export default function NotFoundPage(){
+    return(
+        <>NO ENCONTRADO</>
     )
 }

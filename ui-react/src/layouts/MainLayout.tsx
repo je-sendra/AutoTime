@@ -1,9 +1,19 @@
-import { Outlet, Link } from 'react-router-dom'
+import { Outlet, Link, Navigate } from 'react-router-dom'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import RepoButton from '../components/RepoButton'
+import { useState } from 'react'
+import LoginPage from '../pages/LoginPage'
 
 export default function MainLayout() {
 
+    let userToken = localStorage.getItem("userToken")
+
+    const [isLoggedIn, setIsLoggedIn] = useState<Boolean>(userToken !== null)
+
+    function onLoginSuccess(token: string) {
+        localStorage.setItem("userToken", token)
+        setIsLoggedIn(true)
+    }
 
     return (
         <>
@@ -21,7 +31,7 @@ export default function MainLayout() {
 
                 <ul className="navbar-nav">
                     {
-                        "userToken" !== undefined ?
+                        isLoggedIn ?
                             <>
                                 <li className="nav-item">
                                     <Link className="nav-link text-white" to="/">INICIO</Link>
@@ -41,7 +51,13 @@ export default function MainLayout() {
                 <RepoButton />
             </nav>
             <div style={{ paddingTop: 56 }}></div>
-            <Outlet />
+
+            {
+                isLoggedIn ?
+                    <Outlet />
+                    :
+                    <LoginPage onSuccess={onLoginSuccess} />
+            }
         </>
     )
 }

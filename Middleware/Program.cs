@@ -23,6 +23,14 @@ public class Program
             app.UseSwaggerUI();
         }
 
+        app.UseCors(
+                options => options.WithOrigins(
+                    "https://autotime.azurewebsites.net",
+                    "https://autotime-react.azurewebsites.net",
+                    "http://localhost:3000")
+                    .AllowAnyMethod()
+            );
+
         app.UseHttpsRedirection();
 
         app.UseAuthorization();

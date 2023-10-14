@@ -13,7 +13,6 @@ export default function LoginBox({ onLoginButtonClicked }) {
                 </div>
                 <div className="card-body">
                     <form>
-
                         <label htmlFor="email" className="form-label">Correo electrónico</label>
                         <input
                             type="text"

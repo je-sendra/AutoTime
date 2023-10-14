@@ -37,7 +37,7 @@ export default function MySchedulesPage() {
 
             <div className="container-fluid bg-dark text-dark">
                 <div className="input-group container p-2" style={{ maxWidth: 350 }}>
-                    <div className="form-floating">
+                    <form className="form-floating">
                         <input
                             id="newScheduleNameInput"
                             type="text"
@@ -47,7 +47,7 @@ export default function MySchedulesPage() {
                             onChange={evt => { setNewScheduleName(evt.target.value) }}
                         />
                         <label htmlFor="newScheduleNameInput">Nuevo horario</label>
-                    </div>
+                    </form>
                     <button
                         className="btn btn-success"
                         onClick={() => addSchedule(newScheduleName)}
