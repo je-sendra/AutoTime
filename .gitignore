@@ -9,3 +9,5 @@
 /ui-react/.deployment
 /.vs
 /Middleware/Middleware.csproj.user
+/Middleware/Properties/ServiceDependencies
+/Middleware/Properties/PublishProfiles
