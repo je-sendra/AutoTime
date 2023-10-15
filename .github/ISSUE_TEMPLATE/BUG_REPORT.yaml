@@ -30,7 +30,7 @@ body:
       label: Version
       description: ¿Qué versión de nuestro software estás utilizando?
       options:
-        - 1.0.0
+        - 2.0.0
     validations:
       required: true
   - type: dropdown
