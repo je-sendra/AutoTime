@@ -57,7 +57,7 @@ export default function ScheduleCard(props: { schedule: Schedule }) {
         let newSchedule = mySchedule
         let id = clockingAction.idClocking
         let i = newSchedule.clockings.findIndex(currentClocking => currentClocking.idClocking === id)
-        newSchedule.clockings[i] = { ...newSchedule.clockings[i], scheduledTime: evt.target.value }
+        newSchedule.clockings[i] = { ...newSchedule.clockings[i], scheduledTime: (evt.target.value + ":00") }
         setNeedsToSave(true)
         setMySchedule(Object.assign(new Schedule(), newSchedule))
     }
@@ -81,13 +81,14 @@ export default function ScheduleCard(props: { schedule: Schedule }) {
     }
 
     async function handleRunButtonClicked() {
-        console.log(selectedDate)
         let apiEndpoint = "https://autotime-api.azurewebsites.net/user/schedule?" +
             "date=" + selectedDate +
-            "&token" + localStorage.getItem("userToken")
-        console.log("HEY")
-        let response = await axios.post(apiEndpoint, mySchedule)
-        console.log(response)
+            "&token=" + localStorage.getItem("userToken")
+        axios.post(apiEndpoint, mySchedule, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
     }
 
     return (

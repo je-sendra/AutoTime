@@ -8,6 +8,7 @@ namespace VewTech.AutoTime.Middleware.Controllers;
 [Route("[controller]")]
 public class UserController : Controller
 {
+    
     // Login with the user credentials to the Intratime service and return the user
     [HttpPost("login")]
     public User PostLogin(string user, string pin)
@@ -40,8 +41,8 @@ public class UserController : Controller
         httpRequest.Headers.Add("token", token);
         httpRequest.Content = content;
         var response = Clients.IntratimeClient.SendAsync(httpRequest).Result;
-        if (!response.IsSuccessStatusCode) 
-        throw new HttpRequestException(response.Content.ReadAsStringAsync().Result);
+        if (!response.IsSuccessStatusCode)
+            throw new HttpRequestException(response.Content.ReadAsStringAsync().Result);
     }
 
     // Post a whole Schedule object
@@ -52,14 +53,14 @@ public class UserController : Controller
         foreach (var currentClocking in schedule.Clockings)
         {
             var variationSeconds = random.Next(schedule.MinutesVariation * 60);
-            
+
             var datetime = ( // The datetime the clocking will be performed at
                 date.ToDateTime(TimeOnly.MinValue) +  // Convert the parameter DateOnly to DateTime
                 currentClocking.ScheduledTime.ToTimeSpan()) // Add the ScheduleTime
                 .AddSeconds(variationSeconds); // Add the variation
-            
+
             PostClocking(
-                (int) currentClocking.Action,
+                (int)currentClocking.Action,
                 datetime,
                 token
             );
