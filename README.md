@@ -18,7 +18,7 @@ Las funcionalidades planeadas para AutoTime incluyen:
 
 ## Acceso
 
-Se puede acceder a la aplicación a través de https://autotime-react.azurewebsites.net.
+Se puede acceder a la aplicación a través de https://autotime.azurewebsites.net.
 
 Se puede interactuar directamente con la API a través de Swagger en https://autotime-api.azurewebsites.net/swagger.
 
