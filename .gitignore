@@ -7,3 +7,5 @@
 /UI/obj
 /UI/bin
 /ui-react/.deployment
+/.vs
+/Middleware/Middleware.csproj.user
