@@ -12,3 +12,6 @@
 /Middleware/Properties/ServiceDependencies
 /Middleware/Properties/PublishProfiles
 .fake
+/Tests/obj
+/Tests/bin
+/Tests/TestResults
