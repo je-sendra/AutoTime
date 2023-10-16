@@ -11,3 +11,4 @@
 /Middleware/Middleware.csproj.user
 /Middleware/Properties/ServiceDependencies
 /Middleware/Properties/PublishProfiles
+.fake

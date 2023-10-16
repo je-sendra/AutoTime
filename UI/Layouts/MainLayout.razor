@@ -1,0 +1,33 @@
+﻿@inherits LayoutComponentBase
+@using VewTech.AutoTime.UI.Components
+
+@namespace VewTech.AutoTime.UI.Layouts
+
+<nav class="
+    navbar
+    navbar-expand
+    navbar-dark
+    bg-primary
+    justify-content-between
+    fixed-top
+    ps-3
+    pe-3">
+
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link text-white" href="/">INICIO</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white" href="/schedules">HORARIOS</a>
+        </li>
+        <li class='nav-item'>
+            <a class='nav-link text-white' href="https://intratime.es" target="_blank">Intratime</a>
+        </li>
+    </ul>
+
+    <RepoButton />
+
+</nav>
+<div style="paddingTop: 56"></div>
+
+@Body

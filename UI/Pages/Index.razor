@@ -1,0 +1,19 @@
+﻿@using VewTech.AutoTime.UI.Services;
+
+@inject UserTokenService userTokenService
+
+@namespace VewTech.AutoTime.UI.Pages
+
+@page "/"
+
+<h1>Hello, world! adssdssadads</h1>
+
+<button onclick="@u">TEST</button>
+
+@{
+    async void u()
+    {
+        var a = await userTokenService.GetUserTokenAsync();
+        Console.WriteLine(a);
+    }
+}
