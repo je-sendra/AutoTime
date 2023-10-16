@@ -1,4 +1,4 @@
-name: Informe de Bug
+name: 🐛 Informe de Bug
 description: Notifica un bug en la aplicación
 title: "[Bug]: "
 labels: ["bug"]
