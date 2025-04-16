@@ -1,0 +1,18 @@
+services:
+  middleware:
+    build:
+      context: .
+      dockerfile: Middleware/Dockerfile
+    ports:
+      - "81:80"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+
+  ui-react:
+    build:
+      context: ./ui-react
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - middleware
